@@ -1,13 +1,18 @@
 import React, { createContext, useReducer, useContext } from "react"
 
 function generateInitialState() {
-  return { thing: true, count: 0 }
+  return { thing: true, count: genCount() }
+}
+
+function genCount(previousCount) {
+  const prevCount = previousCount ? previousCount : 0
+  return prevCount + 1
 }
 
 function reducer(state, action) {
   switch (action.type) {
     case "increment":
-      return { ...state, count: state.count + 1 }
+      return { ...state, count: genCount(state.count) }
     case "decrement":
       return { count: state.count - 1 }
     default:
